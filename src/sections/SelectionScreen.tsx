@@ -295,7 +295,7 @@ export default function SelectionScreen({ onSelect }: Props) {
                 whiteSpace: 'nowrap',
               }}
             >
-              <span>remember {model.name.toLowerCase()}</span>
+              <span>{model.name.toUpperCase()}</span>
             </button>
           </div>
         ))}
