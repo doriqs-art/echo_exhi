@@ -96,9 +96,9 @@ export default function SelectionScreen({ onSelect }: Props) {
         floatOffset: Math.random() * Math.PI * 2,
         floatSpeed: 0.6 + Math.random() * 0.3,
         rotSpeed: new THREE.Vector3(
-          (Math.random() - 0.5) * 0.004,
-          0.006 + Math.random() * 0.004,
-          (Math.random() - 0.5) * 0.002,
+          (Math.random() - 0.5) * 0.006,
+          0,
+          (Math.random() - 0.5) * 0.005,
         ),
         hovered: false,
       };
@@ -161,7 +161,6 @@ export default function SelectionScreen({ onSelect }: Props) {
             // Idle: gentle float + slow auto-rotation
             const floatY = Math.sin(t * entry.floatSpeed + entry.floatOffset) * 0.12;
             entry.group.position.y = floatY;
-            entry.group.rotation.y += entry.rotSpeed.y;
             entry.group.rotation.x += entry.rotSpeed.x;
             entry.group.rotation.z += entry.rotSpeed.z;
           } else {
