@@ -7,12 +7,13 @@ import MemoryScreen from '@/sections/MemoryScreen';
 import GeneratingScreen from '@/sections/GeneratingScreen';
 import GalleryScreen from '@/sections/GalleryScreen';
 import MemoriesScreen from '@/sections/MemoriesScreen';
+import SelectionScreen from '@/sections/SelectionScreen';
 import MemoriesRing from '@/components/MemoriesRing';
 import LogoBlur from '@/components/LogoBlur';
 import SoundToggle from '@/components/SoundToggle';
 import * as sound from '@/lib/sound';
 
-type Phase = 'intro' | 'warp' | 'prompt' | 'loading' | 'memory' | 'generating' | 'gallery' | 'memories';
+type Phase = 'intro' | 'warp' | 'selection' | 'prompt' | 'loading' | 'memory' | 'generating' | 'gallery' | 'memories';
 type Memory = { name: string; photoUrl: string | null; id?: string };
 
 const BOOST_MS = 1200;
@@ -80,7 +81,7 @@ export default function HeroPortal() {
     setPhase('warp');
     warpTimeout.current = window.setTimeout(() => {
       warpRef.current = false;
-      setPhase('prompt');
+      setPhase('selection');
     }, BOOST_MS);
   };
 
@@ -566,6 +567,16 @@ export default function HeroPortal() {
             <span>Remember this</span>
           </button>
         </div>
+      )}
+
+
+      {phase === 'selection' && (
+        <SelectionScreen
+          onSelect={(id, name) => {
+            setMemory({ id, name, photoUrl: null });
+            setPhase('gallery');
+          }}
+        />
       )}
 
       {phase === 'loading' && (
